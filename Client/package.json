@@ -1,0 +1,17 @@
+{
+  "name": "th-client",
+  "version": "1.0.0",
+  "description": "Treasure Hunt game client side GUI",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chillFil & Fxllo",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
+  }
+}

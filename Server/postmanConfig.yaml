@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: Treasure Hunt API
+  version: 1.0.0
+  description: API for the Treasure Hunt game
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /signup:
+    get:
+      summary: Sign up a team
+      parameters:
+        - in: query
+          name: team
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: psw
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team registered
+        '400':
+          description: Missing parameters
+        '409':
+          description: Team name already taken
+        '429':
+          description: Same client IP already registered a team
+    post:
+      summary: Sign up a team (POST method)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: string
+                psw:
+                  type: string
+      responses:
+        '200':
+          description: Team registered
+        '400':
+          description: Missing parameters
+        '409':
+          description: Team name already taken
+        '429':
+          description: Same client IP already registered a team
+  /leaderboard:
+    get:
+      summary: Get leaderboard
+      responses:
+        '200':
+          description: Returns leaderboard
+  /map:
+    get:
+      summary: Get the map as JSON
+      responses:
+        '200':
+          description: Returns map as JSON
+  /displayMap:
+    get:
+      summary: Get the map as HTML
+      responses:
+        '200':
+          description: Returns map as HTML
+  /dig:
+    get:
+      summary: Dig at a specified location
+      parameters:
+        - in: query
+          name: team
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: psw
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: x
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: y
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dig result
+        '400':
+          description: Missing or malformed parameters
+        '401':
+          description: Unregistered team
+        '403':
+          description: Wrong password
+        '429':
+          description: Dig throttled
+
+components:
+  schemas:
+    Cell:
+      type: object
+      properties:
+        dug:
+          type: boolean
+        treasure:
+          type: boolean
